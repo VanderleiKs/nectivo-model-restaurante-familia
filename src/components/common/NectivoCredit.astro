@@ -1,0 +1,24 @@
+---
+import Icon from "../ui/Icon.astro";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<a
+  href="https://nectivo.com.br"
+  target="_blank"
+  rel="noopener"
+  class:list={[
+    "inline-flex items-center whitespace-nowrap gap-1 transition-opacity hover:opacity-80",
+    className,
+  ]}
+>
+  <Icon name="nectivo" class="h-3.5 w-auto shrink-0" />
+  <span class="sr-only">Nectivo</span>
+  | Presença digital
+  <span class="sr-only"> (abre em nova aba)</span>
+</a>

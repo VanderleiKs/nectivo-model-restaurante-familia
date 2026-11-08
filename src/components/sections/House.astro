@@ -1,0 +1,25 @@
+---
+import Button from '../ui/Button.astro';
+import Container from '../ui/Container.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  text: string;
+  fact: string;
+  cta: { label: string; href: string };
+}
+const { eyebrow, title, text, fact, cta } = Astro.props;
+---
+
+<section id="a-casa" class="border-t border-line bg-background py-16 sm:py-20" aria-labelledby="a-casa-title">
+  <Container class="grid gap-8 md:grid-cols-[1fr_1.1fr] md:items-start md:gap-14">
+    <SectionHeading id="a-casa-title" eyebrow={eyebrow} title={title} />
+    <div>
+      <p class="max-w-prose text-lg leading-relaxed text-foreground">{text}</p>
+      <p class="mt-4 border-l-2 border-wood pl-4 text-muted">{fact}</p>
+      <Button href={cta.href} variant="outline" class="mt-8">{cta.label}</Button>
+    </div>
+  </Container>
+</section>

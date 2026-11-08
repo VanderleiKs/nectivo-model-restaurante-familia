@@ -1,0 +1,14 @@
+---
+import Button from '../components/ui/Button.astro';
+import Container from '../components/ui/Container.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Página não encontrada" description="A página que você procura não existe." noindex whatsapp={false}>
+  <Container size="md" class="py-24 text-center">
+    <p class="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Erro 404</p>
+    <h1 class="mt-3 text-fluid-xl text-highlight">Página não encontrada</h1>
+    <p class="mt-3 text-muted">O endereço pode ter mudado ou não existe mais.</p>
+    <Button href="/" class="mt-8">Voltar ao início</Button>
+  </Container>
+</BaseLayout>

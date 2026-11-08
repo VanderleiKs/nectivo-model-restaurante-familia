@@ -1,0 +1,135 @@
+---
+import { Image } from "astro:assets";
+import { site } from "../../config/site";
+import { formatAddress, mapsUrl, telUrl, whatsappUrl } from "../../utils/urls";
+import Button from "../ui/Button.astro";
+import Container from "../ui/Container.astro";
+import Icon from "../ui/Icon.astro";
+import SectionHeading from "../ui/SectionHeading.astro";
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  text: string;
+  image: ImageMetadata;
+  imageAlt: string;
+  whatsappLabel: string;
+  phoneLabel: string;
+  mapsLabel: string;
+  addressTitle: string;
+  hoursTitle: string;
+  phoneTitle: string;
+}
+const {
+  eyebrow,
+  title,
+  text,
+  image,
+  imageAlt,
+  whatsappLabel,
+  phoneLabel,
+  mapsLabel,
+  addressTitle,
+  hoursTitle,
+  phoneTitle,
+} = Astro.props;
+---
+
+<section
+  id="visita"
+  class="relative isolate overflow-hidden border-t border-line bg-surface py-16 sm:py-20"
+  aria-labelledby="visita-title"
+>
+  <Image
+    src={image}
+    alt={imageAlt}
+    widths={[640, 1024, 1536, 1960]}
+    sizes="100vw"
+    loading="lazy"
+    class="absolute inset-0 -z-20 size-full object-cover object-[60%_center] md:object-center"
+  />
+  <!-- Gradiente: sólido à esquerda, transparente à direita -->
+  <div
+    class="absolute inset-0 -z-10 bg-linear-to-r from-background via-background/90 to-background/10"
+    aria-hidden="true">
+  </div>
+  <!-- Fade na base, para emendar com o rodapé -->
+  <div
+    class="absolute inset-x-0 bottom-0 -z-10 h-24 bg-linear-to-t from-background to-transparent"
+    aria-hidden="true">
+  </div>
+
+  <Container
+    class="relative grid gap-10 lg:grid-cols-[1.5fr_1fr] lg:items-stretch lg:gap-14"
+  >
+    <div class="flex flex-col justify-between gap-8">
+      <SectionHeading id="visita-title" eyebrow={eyebrow} title={title} />
+      <p
+        class="mt-4 max-w-prose text-lg leading-relaxed text-foreground whitespace-pre-line"
+      >
+        {text}
+      </p>
+      <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+        <Button href={whatsappUrl()} size="lg"
+          ><Icon name="whatsapp" class="size-5" />{whatsappLabel}</Button
+        >
+        <Button href={telUrl()} variant="outline" size="lg"
+          ><Icon name="phone" class="size-5" />{phoneLabel}</Button
+        >
+        <Button href={mapsUrl()} variant="outline" size="lg"
+          ><Icon name="pin" class="size-5" />{mapsLabel}</Button
+        >
+      </div>
+    </div>
+
+    <dl class="grid content-start gap-6">
+      <div
+        class="border border-line rounded-lg p-2 flex items-center gap-4 bg-secondary"
+      >
+        <Icon name="pin" class="size-7 text-primary" />
+        <div>
+          <dt class="font-semibold tracking-[0.18em] text-primary">
+            {addressTitle}
+          </dt>
+          <dd class="mt-1.5">
+            <address class="not-italic leading-relaxed text-foreground">
+              {formatAddress()}
+            </address>
+          </dd>
+        </div>
+      </div>
+      <div
+        class="border border-line rounded-lg p-2 flex items-center gap-4 bg-secondary"
+      >
+        <Icon name="clock" class="size-7 text-primary" />
+        <div>
+          <dt class="font-semibold tracking-[0.18em] text-primary">
+            {hoursTitle}
+          </dt>
+          <dd class="mt-1.5 leading-relaxed text-foreground">
+            {
+              site.hours.map((h) => (
+                <p>
+                  {h.label}, {h.text}
+                </p>
+              ))
+            }
+          </dd>
+        </div>
+      </div>
+      <div
+        class="border border-line rounded-lg p-2 flex items-center gap-4 bg-secondary"
+      >
+        <Icon name="phone" class="size-7 text-primary" />
+        <div>
+          <dt class="font-semibold tracking-[0.18em] text-primary">
+            {phoneTitle}
+          </dt>
+          <dd class="mt-1.5 text-foreground">
+            <a href={telUrl()} class="hover:text-primary">{site.phone}</a>
+          </dd>
+        </div>
+      </div>
+    </dl>
+  </Container>
+</section>

@@ -1,0 +1,88 @@
+---
+import type { IconName } from "@/utils/icons";
+import { site } from "../../config/site";
+import { mailtoUrl } from "../../utils/urls";
+import Container from "../ui/Container.astro";
+import Icon from "../ui/Icon.astro";
+import Brand from "./Brand.astro";
+import NectivoCredit from "./NectivoCredit.astro";
+
+const year = new Date().getFullYear();
+const socials = site.social.map((s) => ({
+  ...s,
+  iconName: s.name.toLowerCase() as IconName,
+}));
+---
+
+<footer class="border-t border-line bg-secondary text-on-secondary">
+  <Container
+    class="flex flex-col gap-5 lg:flex-row lg:justify-between lg:items-center py-5"
+  >
+    <div>
+      <Brand size="sm" />
+    </div>
+
+    <span
+      class="hidden h-12 x-px lg:block border border-line"
+      aria-hidden="true"></span>
+
+    <nav aria-label="Links do rodapé">
+      <ul class="flex gap-3 text-sm text-muted">
+        {
+          site.footerNav.map((l) => (
+            <li>
+              <a href={l.href} class="hover:text-highlight">
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <span
+      class="hidden h-12 x-px lg:block border border-line"
+      aria-hidden="true"></span>
+
+    <div class="flex gap-2">
+
+      <ul class="flex content-start gap-2 text-sm text-muted">
+        {
+          socials.map((s) => (
+            <li>
+              <a
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:text-highlight"
+              >
+                <Icon name={s.iconName} class="size-5 text-primary" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <ul class="grid content-start gap-2 text-sm text-muted">
+        <li>
+          <a
+            href={mailtoUrl(site.email)}
+            class="flex gap-2 break-all hover:text-highlight"
+          >
+            <Icon name="mail" class="size-5.5 text-primary rounded-lg" />
+          </a>
+        </li>
+      </ul>
+    </div>
+  </Container>
+  <div class="border-t border-line">
+    <Container
+      class="py-4 text-xs text-muted flex justify-between items-center"
+    >
+      <span
+        >© {year} - {site.name}. <br class="sm:hidden" />Todos os direitos
+        reservados.</span
+      >
+      <NectivoCredit />
+    </Container>
+  </div>
+</footer>

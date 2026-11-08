@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="10 10 80 80" fill="#F09A2A">
+  <!-- Moldura arredondada (anel) -->
+  <path fill-rule="evenodd" clip-rule="evenodd"
+    d="M32 10H68A22 22 0 0 1 90 32V68A22 22 0 0 1 68 90H32A22 22 0 0 1 10 68V32A22 22 0 0 1 32 10ZM32 14H68A18 18 0 0 1 86 32V68A18 18 0 0 1 68 86H32A18 18 0 0 1 14 68V32A18 18 0 0 1 32 14Z" />
+  <!-- Garfo: dentes laterais em U -->
+  <path d="M31 30A2 2 0 0 1 35 30V43Q35 47 40 47Q45 47 45 43V30A2 2 0 0 1 49 30V43Q49 51 40 51Q31 51 31 43Z" />
+  <!-- Garfo: dente central e cabo -->
+  <path d="M38 30A2 2 0 0 1 42 30V68A2 2 0 0 1 38 68Z" />
+  <!-- Faca -->
+  <path d="M60 28C71 31 74 45 69 56H64V68A2 2 0 0 1 60 68Z" />
+</svg>

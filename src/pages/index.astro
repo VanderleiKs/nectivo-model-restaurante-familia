@@ -1,0 +1,18 @@
+---
+import Ambient from '../components/sections/Ambient.astro';
+import Hero from '../components/sections/Hero.astro';
+import House from '../components/sections/House.astro';
+import Meals from '../components/sections/Meals.astro';
+import Visit from '../components/sections/Visit.astro';
+import { ambient, hero, house, meals, visit } from '../data/home';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<!-- Sem "title": usa site.seo.defaultTitle. Sem FAQ/avaliações: não há conteúdo confirmado para isso. -->
+<BaseLayout>
+  <Hero {...hero} />
+  <Meals {...meals} />
+  <House {...house} />
+  <Ambient {...ambient} />
+  <Visit {...visit} />
+</BaseLayout>

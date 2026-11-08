@@ -1,0 +1,52 @@
+---
+import { site } from '../../config/site';
+import { whatsappUrl } from '../../utils/urls';
+import Icon from '../ui/Icon.astro';
+
+interface Props {
+  /** Padrão: site.whatsapp. Aceita qualquer formato; só os dígitos são usados. */
+  phone?: string;
+  /** Padrão: site.whatsappMessage. */
+  message?: string;
+  label?: string;
+  /** true = botão fixo no canto da tela (com balão opcional); false = botão inline com texto. */
+  floating?: boolean;
+  class?: string;
+}
+const { phone = site.whatsapp, message = site.whatsappMessage, label = 'Falar no WhatsApp', floating = true, class: className } = Astro.props;
+const href = whatsappUrl(phone, message);
+const hint = site.whatsappHint;
+---
+
+{
+  floating ? (
+    <aside aria-label="Contato rápido pelo WhatsApp" class="group fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-[max(1.25rem,env(safe-area-inset-right))] z-60 flex items-center gap-3">
+      {hint && (
+        <div aria-hidden="true" class="invisible grid translate-x-2 gap-0.5 rounded-brand bg-background px-4 py-3 text-foreground opacity-0 shadow-xl transition duration-200 group-focus-within:visible group-focus-within:translate-x-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-x-0 group-hover:opacity-100">
+          <strong class="text-sm">{hint.title}</strong>
+          <span class="whitespace-nowrap text-xs text-muted">{hint.text}</span>
+        </div>
+      )}
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${label} (abre em nova aba)`}
+        class:list={['flex size-15 items-center justify-center rounded-full bg-primary text-on-primary shadow-xl shadow-primary/35 transition duration-200 hover:bg-primary/90 motion-safe:hover:-translate-y-0.5', className]}
+      >
+        <Icon name="whatsapp" class="size-7" />
+      </a>
+    </aside>
+  ) : (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      class:list={['inline-flex items-center justify-center gap-2 rounded-brand bg-primary px-5 py-3 font-bold text-on-primary transition hover:bg-primary/90', className]}
+    >
+      <Icon name="whatsapp" class="size-5" />
+      <span>{label}</span>
+      <span class="sr-only">(abre em nova aba)</span>
+    </a>
+  )
+}

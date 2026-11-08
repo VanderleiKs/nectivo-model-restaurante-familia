@@ -1,0 +1,54 @@
+---
+import { site } from '../../config/site';
+import { whatsappUrl } from '../../utils/urls';
+import { hero } from '../../data/home';
+import Button from '../ui/Button.astro';
+import Container from '../ui/Container.astro';
+import Brand from './Brand.astro';
+---
+
+<header class="sticky top-0 z-50 border-b border-line bg-secondary text-on-secondary">
+  <Container class="flex min-h-16 items-center justify-between gap-3 sm:gap-6">
+    <Brand />
+
+    <div class="flex items-center gap-2 sm:gap-6">
+      <nav aria-label="Principal" class="hidden items-center gap-6 text-sm font-semibold uppercase tracking-[0.12em] md:flex">
+        {site.nav.map((l) => (
+          <a href={l.href} class="text-foreground/85 transition-colors hover:text-primary">{l.label}</a>
+        ))}
+      </nav>
+
+      <Button href={whatsappUrl()} size="sm">{hero.primaryCta}</Button>
+
+      <!-- Menu mobile: <details> nativo (fecha ao clicar em um link: script no fim do arquivo) -->
+      <details data-mobile-menu class="md:hidden">
+        <summary
+          class="flex size-11 cursor-pointer list-none items-center justify-center rounded-brand [&::-webkit-details-marker]:hidden"
+          aria-label="Abrir ou fechar menu"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </summary>
+        <nav aria-label="Principal (mobile)" class="absolute inset-x-0 top-full grid border-b border-line bg-secondary px-4 pb-3 pt-1">
+          {site.nav.map((l) => (
+            <a href={l.href} class="border-b border-line py-3 text-sm font-semibold uppercase tracking-[0.12em] text-foreground last:border-b-0">{l.label}</a>
+          ))}
+        </nav>
+      </details>
+    </div>
+  </Container>
+</header>
+
+<script>
+  const menu = document.querySelector<HTMLDetailsElement>('[data-mobile-menu]');
+  if (menu) {
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => (menu.open = false)));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.open) {
+        menu.open = false;
+        menu.querySelector('summary')?.focus();
+      }
+    });
+  }
+</script>

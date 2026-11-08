@@ -1,0 +1,12 @@
+---
+interface Props {
+  /** Texto com "\n" onde deve haver quebra de linha. */
+  text: string;
+  /** true = a quebra só vale a partir de sm (em telas pequenas o texto flui). */
+  fromSm?: boolean;
+}
+const { text, fromSm = false } = Astro.props;
+const lines = text.split('\n');
+---
+
+{lines.map((line, i) => <>{i > 0 && <br class={fromSm ? 'hidden sm:inline' : undefined} />}{line}</>)}

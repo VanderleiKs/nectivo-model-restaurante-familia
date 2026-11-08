@@ -1,0 +1,11 @@
+---
+interface Props {
+  as?: keyof HTMLElementTagNameMap;
+  size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
+  class?: string;
+}
+const { as: Tag = 'div', size = 'lg', class: className } = Astro.props;
+const sizes = { sm: 'max-w-3xl', md: 'max-w-5xl', lg: 'max-w-[74rem]', xl: 'max-w-7xl', full: 'max-w-none' };
+---
+
+<Tag class:list={['mx-auto w-full px-4 sm:px-6 lg:px-8', sizes[size], className]}><slot /></Tag>

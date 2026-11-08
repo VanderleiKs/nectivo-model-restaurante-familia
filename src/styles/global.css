@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+/* Tokens do Tailwind apontando para as variáveis geradas a partir de src/config/theme.ts */
+@theme inline {
+  --color-primary: var(--theme-primary);
+  --color-primary-on-dark: var(--theme-primary-on-dark);
+  --color-secondary: var(--theme-secondary);
+  --color-accent: var(--theme-accent);
+  --color-background: var(--theme-background);
+  --color-surface: var(--theme-surface);
+  --color-foreground: var(--theme-foreground);
+  --color-muted: var(--theme-muted);
+  --color-line: var(--theme-line);
+  --color-on-primary: var(--theme-on-primary);
+  --color-on-secondary: var(--theme-on-secondary);
+  --color-on-accent: var(--theme-on-accent);
+  --color-primary-hover: var(--theme-primary-hover);
+  --color-highlight: var(--theme-highlight);
+  --color-wood: var(--theme-wood);
+  --font-heading: var(--theme-font-heading);
+  --font-body: var(--theme-font-body);
+  --radius-brand: var(--theme-radius);
+}
+
+/* Tipografia fluida: text-fluid-lg, text-fluid-xl, text-fluid-2xl, text-fluid-hero */
+@theme {
+  --text-fluid-lg: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
+  --text-fluid-xl: clamp(1.75rem, 1.2rem + 2vw, 2.55rem);
+  --text-fluid-2xl: clamp(2rem, 1.2rem + 3.6vw, 3.75rem);
+  --text-fluid-hero: clamp(2.9rem, 1.6rem + 5vw, 4.65rem);
+}
+
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; -webkit-text-size-adjust: 100%; }
+  body { @apply bg-background font-body text-foreground antialiased; }
+  h1, h2, h3, h4, h5, h6 { @apply font-heading; font-weight: 520; }
+  :focus-visible { outline: 3px solid var(--theme-accent); outline-offset: 2px; }
+  img, video, svg { max-width: 100%; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+}

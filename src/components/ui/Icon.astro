@@ -1,0 +1,13 @@
+---
+import { icons, type IconName } from '../../utils/icons';
+
+interface Props {
+  name: IconName;
+  /** Classes Tailwind do SVG. Padrão: size-5. */
+  class?: string;
+}
+const { name, class: className = 'size-5' } = Astro.props;
+const svg = icons[name].replace('<svg ', `<svg class="shrink-0 ${className}" aria-hidden="true" focusable="false" `);
+---
+
+<Fragment set:html={svg} />

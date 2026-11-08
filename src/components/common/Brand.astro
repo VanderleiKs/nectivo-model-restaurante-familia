@@ -1,0 +1,16 @@
+---
+import { site } from '../../config/site';
+import Icon from '../ui/Icon.astro';
+
+interface Props { size?: 'md' | 'sm'; class?: string }
+const { size = 'md', class: className } = Astro.props;
+---
+
+<!-- Marca provisória: só o nome. O ícone atual do site ainda não teve o reuso confirmado. -->
+<a href="/" aria-label={`${site.name}, início`} class:list={['flex gap-2 min-w-0 font-heading leading-tight text-highlight', size === 'md' ? 'text-base sm:text-xl' : 'text-lg', className]}>
+  <Icon name="logo" class='size-10 text-primary'  />
+  <div class="grid gap-0.5">
+    <span>{site.name}</span>
+    <span class="text-muted text-xs">{site.tagline}</span>
+  </div>
+</a>

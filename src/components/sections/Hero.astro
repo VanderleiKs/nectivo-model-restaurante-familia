@@ -1,0 +1,46 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import { whatsappUrl } from '../../utils/urls';
+import Button from '../ui/Button.astro';
+import Container from '../ui/Container.astro';
+import Icon from '../ui/Icon.astro';
+import Lines from '../ui/Lines.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+  image: ImageMetadata;
+  imageAlt?: string;
+  primaryCta: string;
+}
+const { eyebrow, title, description, image, imageAlt = '', primaryCta } = Astro.props;
+---
+
+<section id="inicio" class="relative overflow-hidden bg-secondary text-on-secondary" aria-labelledby="hero-title">
+  <!-- Imagem do LCP: carregamento imediato e prioridade alta -->
+  <Image
+    src={image}
+    alt={imageAlt}
+    widths={[640, 1024, 1536, 1960]}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+    class="absolute inset-0 size-full object-cover object-[60%_center] md:object-center"
+  />
+  <!-- Escurecimento leve, mais forte onde o texto precisa de contraste -->
+  <div class="absolute inset-0 bg-linear-to-r from-secondary/90 via-secondary/60 via-60% to-secondary/10 md:via-secondary/55 md:to-transparent"></div>
+  <div class="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-secondary to-transparent"></div>
+
+  <Container class="relative flex min-h-128 items-center py-16 md:min-h-144">
+    <div class="max-w-2xl">
+      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-primary">{eyebrow}</p>
+      <h1 id="hero-title" class="mt-4 text-fluid-hero leading-[1.02] tracking-tight text-highlight">{title}</h1>
+      <p class="mt-5 max-w-prose text-lg leading-relaxed text-foreground"><Lines text={description} /></p>
+      <div class="mt-8">
+        <Button href={whatsappUrl()} size="lg"><Icon name="whatsapp" class="size-5" />{primaryCta}</Button>
+      </div>
+    </div>
+  </Container>
+</section>

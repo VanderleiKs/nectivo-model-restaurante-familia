@@ -1,0 +1,19 @@
+---
+import Lines from './Lines.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  /** id do <h2>, para aria-labelledby da seção. */
+  id: string;
+  class?: string;
+}
+const { eyebrow, title, id, class: className } = Astro.props;
+---
+
+<div class={className}>
+  <p class="text-xs font-semibold uppercase tracking-[0.18em] text-primary">{eyebrow}</p>
+  <h2 id={id} class="mt-2.5 text-fluid-xl leading-[1.1] tracking-tight text-highlight">
+    <Lines text={title} fromSm />
+  </h2>
+</div>
