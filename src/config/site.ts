@@ -138,7 +138,7 @@ export const site: SiteConfig = {
   seo: {
     defaultTitle: 'Restaurante Família — Buffet livre e alaminutas em Camaquã, RS',
     titleTemplate: '%s | Restaurante Família',
-    defaultImage: '/og-default.jpg',
+    defaultImage: '/og-default.webp',
     defaultImageAlt: 'Restaurante Família, Camaquã: buffet livre no almoço e alaminutas à noite',
     noindexPaths: ['/404'],
     robots: [
