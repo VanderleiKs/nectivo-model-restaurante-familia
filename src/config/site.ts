@@ -73,7 +73,7 @@ export interface SiteConfig {
 }
 
 // PROVISÓRIO: domínio atual de publicação. Trocar quando houver domínio definitivo.
-const domain = 'restaurantefamilia.vanderleis47.workers.dev';
+const domain = 'restaurantefamilia.nectivo.com.br';
 
 /** Crawlers de IA liberados explicitamente (GEO). Remova um se o cliente não quiser aparecer nele. */
 const aiCrawlers = [
